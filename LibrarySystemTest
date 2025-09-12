@@ -1,0 +1,33 @@
+package NewBooks;
+
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+public class LibrarySystemTest {
+
+    private Book book;
+
+    @BeforeEach
+    void setUp() {
+        book = new Book(("abcd", "kishen", "1234");
+    }
+
+    
+    void testIsAvailableInitially() {
+        assertTrue(book.IsAvailable());
+    }
+
+   
+    void testIssueBook() {
+        book.IssueBook();
+        assertFalse(book.IsAvailable());
+    }
+
+ 
+    void testReturnBook() {
+        book.IssueBook();
+        book.ReturnBook();
+        assertTrue(book.IsAvailable());
+    }
+}
