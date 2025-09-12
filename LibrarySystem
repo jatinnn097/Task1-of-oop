@@ -1,0 +1,27 @@
+package NewBooks;
+
+public class LibrarySystem {
+	public static void main(String[] args) {
+	    
+	    Lib library = new Lib(5);
+
+	    
+	    Book p1 = new Book("abcd", "kishen", "1234");
+	    Book p2 = new Book("defg", "jatin", "1837");
+
+	   
+	    library.addBook(p1);
+	    library.addBook(p2);
+
+	   
+	    library.showAllBooks();
+
+
+	    
+	    p1.IssueBook();  
+	    p2.IssueBook(); 
+	    p1.ReturnBook(); 
+	    p2.ReturnBook(); 
+	}
+
+}
