@@ -1,0 +1,33 @@
+public class TestStudentLogger {
+
+    @Test
+    void ensureFileLoggingWithThreads() throws Exception {
+        String outputFile = "log_output.csv";
+
+        if (Files.exists(Paths.get(outputFile))) {
+            Files.delete(Paths.get(outputFile));
+        }
+
+        ResultWriter logWriter = new ResultWriter(outputFile);
+
+        StudentData studentOne = new StudentData("Meera", 301, 82);
+        StudentData studentTwo = new StudentData("Arjun", 302, 95);
+
+        Thread worker1 = new StudentWorker(logWriter, studentOne);
+        Thread worker2 = new StudentWorker(logWriter, studentTwo);
+
+        worker1.start();
+        worker2.start();
+
+        worker1.join();
+        worker2.join();
+
+        String fileInfo = Files.readString(Paths.get(outputFile));
+
+        assertAll(
+            () -> assertTrue(fileInfo.contains("Meera")),
+            () -> assertTrue(fileInfo.contains("Arjun")),
+            () -> assertFalse(fileInfo.isBlank())
+        );
+    }
+}
