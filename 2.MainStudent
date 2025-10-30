@@ -1,0 +1,30 @@
+package StudentExamScoreLogger;
+
+public class MainStudent {
+    public static void main(String[] args) {
+        String logFile = "student_result.csv";
+        ResultWriter writer = new ResultWriter(logFile);
+
+        StudentData a = new StudentData("Neha", 111, 78);
+        StudentData b = new StudentData("Ravi", 112, 89);
+        StudentData c = new StudentData("Sita", 113, 92);
+
+        Thread task1 = new StudentWorker(writer, a);
+        Thread task2 = new StudentWorker(writer, b);
+        Thread task3 = new StudentWorker(writer, c);
+
+          a.start();
+          b.start();
+          c.start();
+
+        try {
+            task1.join();
+            task2.join();
+            task3.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("  recorded successfully");
+    }
+}
