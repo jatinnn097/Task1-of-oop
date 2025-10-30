@@ -1,0 +1,16 @@
+package StudentExamScoreLogger;
+
+public class StudentWorker extends Thread {
+    private final ResultWriter writer;
+    private final StudentData student;
+
+    public StudentWorker(ResultWriter writer, StudentData student) {
+        this.writer = writer;
+        this.student = student;
+    }
+
+    @Override
+    public void run() {
+        writer.saveRecord(student);
+    }
+}
